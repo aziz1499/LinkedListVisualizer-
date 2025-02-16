@@ -1,71 +1,47 @@
 #include "ofApp.h"
 
-//--------------------------------------------------------------
-void ofApp::setup(){
-
+void ofApp::setup() {
+    ofBackground(0);
+    list.insertAtHead(ofRandom(1, 10));
+    cameraX = 0;
 }
 
-//--------------------------------------------------------------
-void ofApp::update(){
-
+void ofApp::update() {
+    // Update logic if needed
 }
 
-//--------------------------------------------------------------
-void ofApp::draw(){
-
+void ofApp::draw() {
+    ofPushMatrix();
+    ofTranslate(cameraX, 0);
+    list.draw();
+    ofPopMatrix();
 }
 
-//--------------------------------------------------------------
-void ofApp::keyPressed(int key){
-
-}
-
-//--------------------------------------------------------------
-void ofApp::keyReleased(int key){
-
-}
-
-//--------------------------------------------------------------
-void ofApp::mouseMoved(int x, int y ){
-
-}
-
-//--------------------------------------------------------------
-void ofApp::mouseDragged(int x, int y, int button){
-
-}
-
-//--------------------------------------------------------------
-void ofApp::mousePressed(int x, int y, int button){
-
-}
-
-//--------------------------------------------------------------
-void ofApp::mouseReleased(int x, int y, int button){
-
-}
-
-//--------------------------------------------------------------
-void ofApp::mouseEntered(int x, int y){
-
-}
-
-//--------------------------------------------------------------
-void ofApp::mouseExited(int x, int y){
-
-}
-
-//--------------------------------------------------------------
-void ofApp::windowResized(int w, int h){
-
-}
-
-//--------------------------------------------------------------
-void ofApp::gotMessage(ofMessage msg){
-
-}
-
-//--------------------------------------------------------------
-void ofApp::dragEvent(ofDragInfo dragInfo){ 
-
+void ofApp::keyPressed(int key) {
+    switch (key) {
+        case 'q':
+            list.insertAtHead(ofRandom(1, 10));
+            break;
+        case 'w':
+            list.insertAtTail(ofRandom(1, 10));
+            break;
+        case 'a':
+            list.deleteHead();
+            break;
+        case 's':
+            list.deleteTail();
+            break;
+        case 'z':
+            list.increaseAmplitude();
+            break;
+        case 'x':
+            list.decreaseAmplitude();
+            break;
+        case OF_KEY_LEFT:
+            cameraX += 10;
+            break;
+        case OF_KEY_RIGHT:
+            cameraX -= 10;
+            break;
+    }
 }
